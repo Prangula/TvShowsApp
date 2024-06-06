@@ -56,7 +56,7 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
             item_tv.text = item.name
             Glide
                 .with(this)
-                .load(item.image.original)
+                .load(item.image?.original)
                 .into(item_iv)
 
             setOnClickListener {
