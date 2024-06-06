@@ -1,7 +1,8 @@
-package com.example.tvshowsapp
+package com.example.tvshowsapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tvshowsapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
