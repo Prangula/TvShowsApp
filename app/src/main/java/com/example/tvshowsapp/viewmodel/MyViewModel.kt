@@ -26,6 +26,9 @@ class MyViewModel@Inject constructor(private val myRepository: MyRepository):Vie
             if(response.isSuccessful){
                 _tvShowResponse.postValue(response.body())
             }
+            else{
+                response.code()
+            }
         }
 
     }
