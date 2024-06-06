@@ -2,6 +2,7 @@ package com.example.tvshowsapp.ui
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -26,6 +27,16 @@ open class MainActivity : AppCompatActivity() {
 
         setUpDialog()
         setUpRv()
+
+        tvShowAdapter.setOnItemClickListener {item->
+
+        val intent = Intent(this@MainActivity,DetailActivity::class.java)
+        intent.putExtra("detail",item)
+        startActivity(intent)
+
+
+
+        }
     }
 
     private fun setUpRv() {
