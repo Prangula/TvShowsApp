@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel:MyViewModel by viewModels()
+    private val viewModel: MyViewModel by viewModels()
     private lateinit var tvShowAdapter: TvShowAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

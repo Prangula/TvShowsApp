@@ -36,7 +36,9 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
     private val differ = AsyncListDiffer(this,diffCallBack)
     var items:List<TvShowResponseItem>
     get() = differ.currentList
-    set(value) = differ.submitList(value)
+    set(value) {
+        differ.submitList(value)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
