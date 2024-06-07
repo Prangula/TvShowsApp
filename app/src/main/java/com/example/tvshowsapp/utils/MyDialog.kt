@@ -12,7 +12,7 @@ class MyDialog {
     fun showDialog(context: Context) {
         dialog = Dialog(context)
         dialog?.setContentView(R.layout.dialog)
-        dialog?.setCancelable(false)
+        dialog?.setCancelable(true)
         dialog?.show()
     }
 
