@@ -1,14 +1,12 @@
 package com.example.tvshowsapp.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
-import com.example.tvshowsapp.model.TvShowResponseItem
+import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
+import com.example.tvshowsapp.modelshow.TvShowResponseItem
 import com.example.tvshowsapp.repository.MyRepository
-import com.example.tvshowsapp.utils.MyDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,6 +17,10 @@ class MyViewModel@Inject constructor(private val myRepository: MyRepository):Vie
 
     private val _tvShowResponse = MutableLiveData<List<TvShowResponseItem>>()
     val tvShowResponse:LiveData<List<TvShowResponseItem>> get() = _tvShowResponse
+
+    private val _searchTvShowResponse = MutableLiveData<List<SearchShowResponseItem>>()
+    val searchTvShowResponse:LiveData<List<SearchShowResponseItem>> get() = _searchTvShowResponse
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -36,6 +38,21 @@ class MyViewModel@Inject constructor(private val myRepository: MyRepository):Vie
             }
             _isLoading.postValue(false) // Set to false regardless of success or failure
         }
+    }
+
+    fun searchAllTvShows(query:String) = viewModelScope.launch {
+
+        _isLoading.postValue(true)
+        myRepository.searchTvShows(query).let { response->
+
+            if(response.isSuccessful){
+                _searchTvShowResponse.postValue(response.body())
+            }
+            _isLoading.postValue(false)
+
+        }
+
+
     }
 
 

@@ -8,25 +8,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
+import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
 import com.example.tvshowsapp.modelshow.TvShowResponseItem
 import kotlinx.android.synthetic.main.item.view.*
 
-class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
+class SearchTvShowAdapter:RecyclerView.Adapter<SearchTvShowAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View)
         :RecyclerView.ViewHolder(itemView)
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<TvShowResponseItem>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<SearchShowResponseItem>(){
         override fun areItemsTheSame(
-            oldItem: TvShowResponseItem,
-            newItem: TvShowResponseItem
+            oldItem: SearchShowResponseItem,
+            newItem: SearchShowResponseItem
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.show?.id == newItem.show?.id
         }
 
         override fun areContentsTheSame(
-            oldItem: TvShowResponseItem,
-            newItem: TvShowResponseItem
+            oldItem: SearchShowResponseItem,
+            newItem: SearchShowResponseItem
         ): Boolean {
             return newItem == oldItem
         }
@@ -34,7 +35,7 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
     }
 
     private val differ = AsyncListDiffer(this,diffCallBack)
-    var items:List<TvShowResponseItem>
+    var items:List<SearchShowResponseItem>
     get() = differ.currentList
     set(value) {
         differ.submitList(value)
@@ -53,10 +54,10 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
 
         holder.itemView.apply {
 
-            item_tv.text = item.name
+            item_tv.text = item.show?.name
             Glide
                 .with(this)
-                .load(item.image?.original)
+                .load(item.show?.image?.original)
                 .into(item_iv)
 
             setOnClickListener {
@@ -68,10 +69,10 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
         }
     }
 
-    private var onItemClickListener:((TvShowResponseItem)->Unit)? = null
+    private var onItemClickListener:((SearchShowResponseItem)->Unit)? = null
 
 
-    fun setOnItemClickListener(listener:(TvShowResponseItem)->Unit) {
+    fun setOnItemClickListener(listener:(SearchShowResponseItem)->Unit) {
 
         onItemClickListener = listener
 

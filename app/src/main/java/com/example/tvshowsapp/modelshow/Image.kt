@@ -1,4 +1,4 @@
-package com.example.tvshowsapp.model
+package com.example.tvshowsapp.modelshow
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
