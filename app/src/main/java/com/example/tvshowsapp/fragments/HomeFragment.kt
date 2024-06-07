@@ -1,5 +1,6 @@
 package com.example.tvshowsapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,10 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.adapter.TvShowAdapter
+import com.example.tvshowsapp.ui.DetailActivity
 import com.example.tvshowsapp.utils.MyDialog
 import com.example.tvshowsapp.viewmodel.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
@@ -27,6 +28,13 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
 
         setUpDialog()
         setUpRv()
+
+        tvShowAdapter.setOnItemClickListener { item->
+           val intent = Intent(activity,DetailActivity::class.java)
+            intent.putExtra("detail",item)
+            startActivity(intent)
+
+        }
 
     }
     private fun setUpRv() {
