@@ -8,25 +8,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
+import com.example.tvshowsapp.modelcast.CastResponseItem
 import com.example.tvshowsapp.modelshow.ShowResponseItem
 import kotlinx.android.synthetic.main.item.view.*
 
-class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
+class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View)
         :RecyclerView.ViewHolder(itemView)
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<ShowResponseItem>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<CastResponseItem>(){
         override fun areItemsTheSame(
-            oldItem: ShowResponseItem,
-            newItem: ShowResponseItem
+            oldItem: CastResponseItem,
+            newItem:CastResponseItem
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.person!!.id == newItem.person!!.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ShowResponseItem,
-            newItem: ShowResponseItem
+            oldItem: CastResponseItem,
+            newItem: CastResponseItem
         ): Boolean {
             return newItem == oldItem
         }
@@ -34,7 +35,7 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
     }
 
     private val differ = AsyncListDiffer(this,diffCallBack)
-    var items:List<ShowResponseItem>
+    var items:List<CastResponseItem>
     get() = differ.currentList
     set(value) {
         differ.submitList(value)
@@ -53,28 +54,15 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
 
         holder.itemView.apply {
 
-            item_tv.text = item.name
+            item_tv.text = item.person!!.name
             Glide
                 .with(this)
-                .load(item.image?.original)
+                .load(item.person?.image?.original)
                 .into(item_iv)
-
-            setOnClickListener {
-                onItemClickListener!!.let {
-                    it(item)
-                }
-            }
 
         }
     }
 
-    private var onItemClickListener:((ShowResponseItem)->Unit)? = null
 
-
-    fun setOnItemClickListener(listener:(ShowResponseItem)->Unit) {
-
-        onItemClickListener = listener
-
-    }
 
 }

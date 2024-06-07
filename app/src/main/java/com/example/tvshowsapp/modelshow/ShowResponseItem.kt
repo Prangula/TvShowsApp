@@ -6,7 +6,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TvShowResponseItem(
+data class ShowResponseItem(
     val averageRuntime: Int?,
     val ended: String?,
     val genres: List<String>?,

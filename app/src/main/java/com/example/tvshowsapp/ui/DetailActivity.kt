@@ -5,35 +5,47 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
+import com.example.tvshowsapp.adapter.ShowCastAdapter
 import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
-import com.example.tvshowsapp.modelshow.TvShowResponseItem
+import com.example.tvshowsapp.modelshow.ShowResponseItem
+import com.example.tvshowsapp.utils.MyDialog
+import com.example.tvshowsapp.viewmodel.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var item: TvShowResponseItem
+    private val viewModel: MyViewModel by viewModels()
+    private lateinit var showCastAdapter: ShowCastAdapter
+    private lateinit var dialog: MyDialog
+    private lateinit var item: ShowResponseItem
     private lateinit var itemSearch: SearchShowResponseItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+
+        setUpDialog()
+        setUpRv()
+
         if(intent.hasExtra("detail")){
             item = intent.getParcelableExtra("detail")!!
             detailUi()
+            viewModel.showCasts(item.id!!)
         }
 
        else if(intent.hasExtra("detail_search")){
             itemSearch= intent.getParcelableExtra("detail_search")!!
             detailUiSearch()
+            viewModel.showCasts(itemSearch.show!!.id!!)
         }
-
-
-
-
     }
 
 
@@ -81,4 +93,40 @@ class DetailActivity : AppCompatActivity() {
         detail_overview.text = summaryWithoutHtml ?: "N/A"
     }
 
+    private fun setUpDialog(){
+
+        dialog = MyDialog()
+        viewModel.isLoading.observe(this@DetailActivity, Observer { isLoading->
+
+            if(isLoading){
+
+                dialog.showDialog(this@DetailActivity)
+
+            }else{
+
+                dialog.hideDialog()
+            }
+
+        })
+
+
+    }
+
+    private fun setUpRv() {
+
+        showCastAdapter = ShowCastAdapter()
+        rv_details.apply {
+
+            adapter =  showCastAdapter
+            layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+
+        viewModel.showCastsResponse.observe(this@DetailActivity, Observer { showCasts ->
+
+            showCastAdapter.items = showCasts
+
+        })
+
+    }
 }

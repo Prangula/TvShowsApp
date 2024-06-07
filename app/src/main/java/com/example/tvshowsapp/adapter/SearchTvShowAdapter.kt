@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
-import com.example.tvshowsapp.modelshow.TvShowResponseItem
 import kotlinx.android.synthetic.main.item.view.*
 
 class SearchTvShowAdapter:RecyclerView.Adapter<SearchTvShowAdapter.ViewHolder>() {
