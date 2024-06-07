@@ -9,8 +9,10 @@ import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
 import com.example.tvshowsapp.modelshow.TvShowResponseItem
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var item: TvShowResponseItem
