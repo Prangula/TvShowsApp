@@ -39,10 +39,12 @@
         android:layout_marginTop="20dp"
         >
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:elevation="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/white"
         app:cardCornerRadius="20dp"
 
         >
@@ -52,10 +54,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:src="@drawable/image"
+
             android:scaleType="fitXY"
             />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
     </FrameLayout>
 
     <TextView
