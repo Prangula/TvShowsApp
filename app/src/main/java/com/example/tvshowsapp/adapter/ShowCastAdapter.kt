@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.modelcast.CastResponseItem
-import com.example.tvshowsapp.modelshow.ShowResponseItem
-import kotlinx.android.synthetic.main.item.view.*
+import kotlinx.android.synthetic.main.item_cast.view.*
+import kotlinx.android.synthetic.main.item_show_search.view.*
 
 class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
 
@@ -42,7 +42,7 @@ class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_cast,parent,false))
     }
 
     override fun getItemCount(): Int {
@@ -54,11 +54,11 @@ class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
 
         holder.itemView.apply {
 
-            item_tv.text = item.person!!.name
+            item_cast_tv.text = item.person!!.name
             Glide
                 .with(this)
                 .load(item.person?.image?.original)
-                .into(item_iv)
+                .into(item_cast_iv)
 
         }
     }

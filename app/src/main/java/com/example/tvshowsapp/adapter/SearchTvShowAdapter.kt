@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
-import kotlinx.android.synthetic.main.item.view.*
+import kotlinx.android.synthetic.main.item_show_search.view.*
 
 class SearchTvShowAdapter:RecyclerView.Adapter<SearchTvShowAdapter.ViewHolder>() {
 
@@ -41,7 +41,7 @@ class SearchTvShowAdapter:RecyclerView.Adapter<SearchTvShowAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_show_search,parent,false))
     }
 
     override fun getItemCount(): Int {
