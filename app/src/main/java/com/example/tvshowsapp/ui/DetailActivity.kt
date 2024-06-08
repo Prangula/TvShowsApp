@@ -38,6 +38,8 @@ class DetailActivity : AppCompatActivity() {
         setUpCastRv()
         setUpEpisodesRv()
 
+        toolbar()
+
         if(intent.hasExtra("detail")){
             item = intent.getParcelableExtra("detail")!!
             detailUi()
@@ -50,6 +52,14 @@ class DetailActivity : AppCompatActivity() {
             detailUiSearch()
             viewModel.showCasts(itemSearch.show!!.id!!)
             viewModel.showEpisodes(itemSearch.show!!.id!!)
+        }
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar_detail)
+        toolbar_detail.setNavigationIcon(R.drawable.baseline_arrow_back_24)
+        toolbar_detail.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
 
