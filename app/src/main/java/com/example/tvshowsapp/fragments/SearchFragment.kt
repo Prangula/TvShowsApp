@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.adapter.SearchTvShowAdapter
@@ -70,7 +71,7 @@ class SearchFragment:Fragment(R.layout.fragment_search) {
         rv_search_shows.apply {
 
             adapter = searchShowAdapter
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(activity,2, GridLayoutManager.VERTICAL,false)
             setHasFixedSize(true)
 
         }
