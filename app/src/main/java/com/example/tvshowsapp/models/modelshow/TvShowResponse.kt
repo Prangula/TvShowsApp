@@ -1,3 +1,3 @@
-package com.example.tvshowsapp.modelshow
+package com.example.tvshowsapp.models.modelshow
 
 class TvShowResponse : ArrayList<ShowResponseItem>()

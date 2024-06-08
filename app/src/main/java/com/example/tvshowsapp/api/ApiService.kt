@@ -1,8 +1,9 @@
 package com.example.tvshowsapp.api
 
-import com.example.tvshowsapp.modelcast.CastResponse
-import com.example.tvshowsapp.modelsearch.SearchShowResponse
-import com.example.tvshowsapp.modelshow.TvShowResponse
+import com.example.tvshowsapp.models.modelcast.CastResponse
+import com.example.tvshowsapp.models.modelepisode.EpisodeResponse
+import com.example.tvshowsapp.models.modelsearch.SearchShowResponse
+import com.example.tvshowsapp.models.modelshow.TvShowResponse
 import com.example.tvshowsapp.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -23,4 +24,10 @@ interface ApiService {
     suspend fun showCasts(
         @Path("showId") showId:Int
     ):Response<CastResponse>
+
+    @GET(Constants.END_POINT_EPISODE)
+    suspend fun getShowEpisodes(
+        @Path("id") showId:Int
+    ):Response<EpisodeResponse>
+
 }

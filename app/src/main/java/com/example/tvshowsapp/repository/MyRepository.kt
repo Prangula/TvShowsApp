@@ -10,4 +10,6 @@ class MyRepository@Inject constructor(private val apiService: ApiService){
 
     suspend fun showCasts(showId:Int) = apiService.showCasts(showId)
 
+    suspend fun getShowEpisodes(showId: Int) = apiService.getShowEpisodes(showId)
+
 }

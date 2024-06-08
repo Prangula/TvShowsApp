@@ -1,3 +1,3 @@
-package com.example.tvshowsapp.modelsearch
+package com.example.tvshowsapp.models.modelsearch
 
 class SearchShowResponse : ArrayList<SearchShowResponseItem>()

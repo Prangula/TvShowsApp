@@ -1,4 +1,4 @@
-package com.example.tvshowsapp.modelsearch
+package com.example.tvshowsapp.models.modelsearch
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

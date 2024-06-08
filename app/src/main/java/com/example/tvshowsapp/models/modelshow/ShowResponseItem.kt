@@ -1,13 +1,12 @@
-package com.example.tvshowsapp.modelsearch
+package com.example.tvshowsapp.models.modelshow
 
 import android.media.Rating
 import android.net.Network
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 @Parcelize
-data class Show(
+data class ShowResponseItem(
     val averageRuntime: Int?,
     val ended: String?,
     val genres: List<String>?,

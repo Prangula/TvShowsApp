@@ -1,5 +1,6 @@
 package com.example.tvshowsapp.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,26 +9,27 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
-import com.example.tvshowsapp.models.modelcast.CastResponseItem
+import com.example.tvshowsapp.models.modelepisode.EpisodeResponseItem
+import com.example.tvshowsapp.models.modelshow.ShowResponseItem
 import kotlinx.android.synthetic.main.item_cast.view.*
-import kotlinx.android.synthetic.main.item_show_search.view.*
+import kotlinx.android.synthetic.main.item_episodes.view.*
 
-class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
+class ShowEpisodesAdapter:RecyclerView.Adapter<ShowEpisodesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View)
         :RecyclerView.ViewHolder(itemView)
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<CastResponseItem>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<EpisodeResponseItem>(){
         override fun areItemsTheSame(
-            oldItem: CastResponseItem,
-            newItem: CastResponseItem
+            oldItem: EpisodeResponseItem,
+            newItem: EpisodeResponseItem
         ): Boolean {
-            return oldItem.person!!.id == newItem.person!!.id
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: CastResponseItem,
-            newItem: CastResponseItem
+            oldItem: EpisodeResponseItem,
+            newItem: EpisodeResponseItem
         ): Boolean {
             return newItem == oldItem
         }
@@ -35,34 +37,32 @@ class ShowCastAdapter:RecyclerView.Adapter<ShowCastAdapter.ViewHolder>() {
     }
 
     private val differ = AsyncListDiffer(this,diffCallBack)
-    var items:List<CastResponseItem>
+    var items:List<EpisodeResponseItem>
     get() = differ.currentList
     set(value) {
         differ.submitList(value)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_cast,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_episodes,parent,false))
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        val item = items[position]
 
         holder.itemView.apply {
 
-            item_cast_tv.text = item.person!!.name
+            item_episodes_tv.text = item.name+" (Season"+" ${item.season},"+ " Episode"+ "${ item.number})"
             Glide
                 .with(this)
-                .load(item.person?.image?.original)
-                .into(item_cast_iv)
-
+                .load(item.image?.original)
+                .into(item_episodes_iv)
         }
     }
-
-
 
 }

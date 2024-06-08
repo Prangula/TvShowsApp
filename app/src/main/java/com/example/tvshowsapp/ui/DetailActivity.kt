@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.adapter.ShowCastAdapter
-import com.example.tvshowsapp.modelsearch.SearchShowResponseItem
-import com.example.tvshowsapp.modelshow.ShowResponseItem
+import com.example.tvshowsapp.adapter.ShowEpisodesAdapter
+import com.example.tvshowsapp.models.modelsearch.SearchShowResponseItem
+import com.example.tvshowsapp.models.modelshow.ShowResponseItem
 import com.example.tvshowsapp.utils.MyDialog
 import com.example.tvshowsapp.viewmodel.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,7 @@ class DetailActivity : AppCompatActivity() {
 
     private val viewModel: MyViewModel by viewModels()
     private lateinit var showCastAdapter: ShowCastAdapter
+    private lateinit var showEpisodesAdapter: ShowEpisodesAdapter
     private lateinit var dialog: MyDialog
     private lateinit var item: ShowResponseItem
     private lateinit var itemSearch: SearchShowResponseItem
@@ -33,18 +35,21 @@ class DetailActivity : AppCompatActivity() {
 
 
         setUpDialog()
-        setUpRv()
+        setUpCastRv()
+        setUpEpisodesRv()
 
         if(intent.hasExtra("detail")){
             item = intent.getParcelableExtra("detail")!!
             detailUi()
             viewModel.showCasts(item.id!!)
+            viewModel.showEpisodes(item.id!!)
         }
 
        else if(intent.hasExtra("detail_search")){
             itemSearch= intent.getParcelableExtra("detail_search")!!
             detailUiSearch()
             viewModel.showCasts(itemSearch.show!!.id!!)
+            viewModel.showEpisodes(itemSearch.show!!.id!!)
         }
     }
 
@@ -112,7 +117,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    private fun setUpRv() {
+    private fun setUpCastRv() {
 
         showCastAdapter = ShowCastAdapter()
         rv_details.apply {
@@ -127,6 +132,24 @@ class DetailActivity : AppCompatActivity() {
             showCastAdapter.items = showCasts
 
         })
+
+    }
+
+    private fun setUpEpisodesRv() {
+
+        showEpisodesAdapter = ShowEpisodesAdapter()
+        rv_episodes.apply {
+
+            adapter = showEpisodesAdapter
+            layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+
+       viewModel.showEpisodesResponse.observe(this@DetailActivity, Observer { showEpisodes->
+
+           showEpisodesAdapter.items = showEpisodes
+
+       })
 
     }
 }

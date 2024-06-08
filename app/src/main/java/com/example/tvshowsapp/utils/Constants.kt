@@ -6,6 +6,8 @@ object Constants {
     const val END_POINT_SHOWS = "shows"
     const val END_POINT_SEARCH = "search/shows"
     const val END_POINT_CAST = "shows/{showId}/cast"
+    const val END_POINT_EPISODE = "shows/{id}/episodes"
+
 
 
 }

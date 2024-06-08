@@ -1,4 +1,4 @@
-package com.example.tvshowsapp.modelcast
+package com.example.tvshowsapp.models.modelcast
 
 data class Country(
     val code: String,

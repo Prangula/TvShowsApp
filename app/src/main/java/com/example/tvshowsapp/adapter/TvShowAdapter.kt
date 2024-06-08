@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tvshowsapp.R
-import com.example.tvshowsapp.modelshow.ShowResponseItem
+import com.example.tvshowsapp.models.modelshow.ShowResponseItem
 import kotlinx.android.synthetic.main.item_show_search.view.*
 
 class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
