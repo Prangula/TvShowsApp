@@ -44,7 +44,7 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
         rv_shows.apply {
 
             adapter = tvShowAdapter
-            layoutManager = GridLayoutManager(activity,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
         }
 
