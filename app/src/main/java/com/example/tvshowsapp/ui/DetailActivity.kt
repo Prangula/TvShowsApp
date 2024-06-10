@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -29,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var dialog: MyDialog
     private lateinit var item: ShowResponseItem
     private lateinit var itemSearch: SearchShowResponseItem
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -108,6 +110,7 @@ class DetailActivity : AppCompatActivity() {
         detail_overview.text = summaryWithoutHtml ?: "N/A"
     }
 
+    @SuppressLint("NewApi")
     private fun setUpDialog(){
 
         dialog = MyDialog()
@@ -127,6 +130,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NewApi")
     private fun setUpCastRv() {
 
         showCastAdapter = ShowCastAdapter()
@@ -145,6 +149,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NewApi")
     private fun setUpEpisodesRv() {
 
         showEpisodesAdapter = ShowEpisodesAdapter()

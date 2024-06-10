@@ -1,5 +1,7 @@
 package com.example.tvshowsapp.viewmodel
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +12,13 @@ import com.example.tvshowsapp.models.modelsearch.SearchShowResponseItem
 import com.example.tvshowsapp.models.modelshow.ShowResponseItem
 import com.example.tvshowsapp.repository.MyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class MyViewModel@Inject constructor(private val myRepository: MyRepository):ViewModel() {
 
@@ -28,7 +33,6 @@ class MyViewModel@Inject constructor(private val myRepository: MyRepository):Vie
 
     private val _showEpisodesResponse = MutableLiveData<List<EpisodeResponseItem>>()
     val showEpisodesResponse:LiveData<List<EpisodeResponseItem>> get() = _showEpisodesResponse
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 

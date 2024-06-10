@@ -1,13 +1,13 @@
 package com.example.tvshowsapp.fragments
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tvshowsapp.R
 import com.example.tvshowsapp.adapter.TvShowAdapter
@@ -28,7 +28,7 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpDialog()
-        setUpRv()
+        setUpShowsRv()
 
         tvShowAdapter.setOnItemClickListener { item->
            val intent = Intent(activity,DetailActivity::class.java)
@@ -38,7 +38,7 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
         }
 
     }
-    private fun setUpRv() {
+    private fun setUpShowsRv() {
 
         tvShowAdapter = TvShowAdapter()
         rv_shows.apply {
@@ -55,7 +55,6 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
         })
 
     }
-
     private fun setUpDialog(){
 
         dialog = MyDialog()
